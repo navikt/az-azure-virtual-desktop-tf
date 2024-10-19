@@ -9,7 +9,7 @@ variable "resource_group" {
     error_message = "Mode must be 'new' or 'existing'"
   }
   validation {
-    condition     = var.resource_group.mode == "existing" || (var.resource_group.mode == "new" && var.resource_group.location == null)
+    condition     = var.resource_group.mode == "existing" || (var.resource_group.mode == "new" && var.resource_group.location != null)
     error_message = "New resource groups must have a location specified"
   }
 }

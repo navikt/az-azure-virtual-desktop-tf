@@ -1,16 +1,32 @@
 variable "resource_group" {
   type = object({
-    type     = string
+    mode     = string
     name     = string
     location = optional(string)
   })
   validation {
-    condition     = var.resource_group.type == "new" || var.resource_group.type == "existing"
-    error_message = "Type must be 'new' or 'existing'"
+    condition     = var.resource_group.mode == "new" || var.resource_group.mode == "existing"
+    error_message = "Mode must be 'new' or 'existing'"
   }
   validation {
-    condition     = var.resource_group.type == "new" || var.resource_group.location == null
+    condition     = var.resource_group.mode == "new" || var.resource_group.location == null
     error_message = "New resource groups must have a location specified"
+  }
+}
+
+variable "workspace" {
+  type = object({
+    mode     = string
+    name     = string
+    location = optional(string)
+  })
+  validation {
+    condition     = var.vnet.mode == "new" || var.vnet.mode == "existing"
+    error_message = "Type må være 'new' eller 'existing'"
+  }
+    validation {
+    condition     = var.vnet.mode == "existing" || (var.vnet.mode == "new" && var.vnet.location != null && var.vnet.address_space != null)
+    error_message = "Nye vnet må ha lokasjon og address_space spesifisert"
   }
 }
 

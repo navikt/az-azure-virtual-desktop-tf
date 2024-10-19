@@ -1,0 +1,54 @@
+{
+  "git.autofetch": true,
+  "files.autoSave": "onWindowChange",
+  "files.trimTrailingWhitespace": true,
+  "editor.detectIndentation": false,
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.renderWhitespace": "trailing",
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "modifications",
+  "editor.formatOnType": true,
+  "editor.wordWrap": "on",
+  "workbench.editor.labelFormat": "short",
+  "prettier.tabWidth": 2,
+
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  "[markdown]": {
+    "editor.wordWrapColumn": 80,
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "strings": "off",
+      "other": "off"
+    },
+    "files.trimTrailingWhitespace": false
+  },
+
+  // Vise liten gul firkant rundt "uvanlige" karakterer"
+  "editor.unicodeHighlight.invisibleCharacters": true,
+  "editor.unicodeHighlight.ambiguousCharacters": true,
+  "editor.unicodeHighlight.nonBasicASCII": true, // denne trigger på æøå også, muligens den blir litt overkill
+  "editor.unicodeHighlight.includeStrings": false,
+
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true
+  },
+
+  // OpenTofu
+  "files.associations": {
+    "*.tofu": "terraform" // For å synliggjøre OpenTofu-spesifikke funksjoner som avviker fra standard Terraform
+  },
+  "opentofu.experimentalFeatures.validateOnSave": true
+}

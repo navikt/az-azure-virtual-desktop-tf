@@ -1,6 +1,6 @@
 {
   "git.autofetch": true,
-  "files.autoSave": "onWindowChange",
+  "files.autoSave": "onFocusChange",
   "files.trimTrailingWhitespace": true,
   "editor.detectIndentation": false,
   "editor.tabSize": 2,

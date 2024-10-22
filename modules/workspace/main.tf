@@ -36,7 +36,7 @@ resource "azurerm_virtual_desktop_workspace" "new" {
 }
 
 resource "azurerm_virtual_desktop_workspace_application_group_association" "main" {
-  depends_on = [azurerm_virtual_desktop_workspace.new, azurerm_virtual_desktop_workspace.existing]
+  depends_on = [azurerm_virtual_desktop_workspace.new, data.azurerm_virtual_desktop_workspace.existing]
   for_each   = { for idx, dag_id in var.dag_ids : idx => dag_id }
 
   workspace_id         = var.workspace.mode == "new" ? azurerm_virtual_desktop_workspace.new[0].id : data.azurerm_virtual_desktop_workspace.existing[0].id

@@ -17,6 +17,10 @@ variable "resource_group" {
 variable "name" {
   description = "Name of the VM"
   type        = string
+  validation {
+    condition     = length(var.name) <= 15
+    error_message = "Name can be at most 15 characters"
+  }
 }
 
 variable "location" {
@@ -46,14 +50,14 @@ variable "local_admin" {
 
 variable "users_group_name" {
   description = "Users that can login as regular users"
-  type        = string
-  default     = null
+  type        = set(string)
+  default     = []
 }
 
 variable "admins_group_name" {
   description = "Users that can login as local administrators"
-  type        = string
-  default     = null
+  type        = set(string)
+  default     = []
 }
 
 # variable "join_type" {

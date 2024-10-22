@@ -124,8 +124,8 @@ variable "tags" {
 
 variable "desktop_users_group_names" {
   description = "Desktop Virtualization Users"
-  type        = list(string)
-  default     = null
+  type        = set(string)
+  default     = []
 }
 
 variable "token_days_valid" {

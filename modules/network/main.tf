@@ -15,14 +15,16 @@ resource "azurerm_resource_group" "new" {
 }
 
 data "azurerm_virtual_network" "existing" {
-  count = var.vnet.mode == "existing" ? 1 : 0
+  depends_on = [azurerm_resource_group.new, data.azurerm_resource_group.existing]
+  count      = var.vnet.mode == "existing" ? 1 : 0
 
   name                = var.vnet.name
   resource_group_name = var.resource_group.name
 }
 
 resource "azurerm_virtual_network" "new" {
-  count = var.vnet.mode == "new" ? 1 : 0
+  depends_on = [azurerm_resource_group.new, data.azurerm_resource_group.existing]
+  count      = var.vnet.mode == "new" ? 1 : 0
 
   name                = var.vnet.name
   address_space       = var.vnet.address_space
@@ -34,14 +36,18 @@ resource "azurerm_virtual_network" "new" {
 }
 
 data "azurerm_subnet" "existing" {
-  count                = var.subnet.mode == "existing" ? 1 : 0
+  depends_on = [azurerm_virtual_network.new, data.azurerm_virtual_network.existing]
+  count      = var.subnet.mode == "existing" ? 1 : 0
+
   name                 = var.subnet.name
   virtual_network_name = var.vnet.name
   resource_group_name  = var.resource_group.name
 }
 
 resource "azurerm_subnet" "new" {
-  count                = var.subnet.mode == "new" ? 1 : 0
+  depends_on = [azurerm_virtual_network.new, data.azurerm_virtual_network.existing]
+  count      = var.subnet.mode == "new" ? 1 : 0
+
   name                 = var.subnet.name
   resource_group_name  = var.resource_group.name
   virtual_network_name = var.vnet.name

@@ -1,11 +1,11 @@
 data "azurerm_resource_group" "existing" {
-  count = var.resource_group.type == "existing" ? 1 : 0
+  count = var.resource_group.mode == "existing" ? 1 : 0
 
   name = var.resource_group.name
 }
 
 resource "azurerm_resource_group" "new" {
-  count = var.resource_group.type == "new" ? 1 : 0
+  count = var.resource_group.mode == "new" ? 1 : 0
 
   name = var.resource_group.name
   location = var.resource_group.location
@@ -71,13 +71,6 @@ resource "azurerm_virtual_desktop_host_pool_registration_info" "hp_reg" {
   expiration_date = time_rotating.token_expiration_date.rotation_rfc3339
 }
 
-output "hostpool_id" {
-  value     = azurerm_virtual_desktop_host_pool.hp.id
-}
 
-output "hp_token" {
-  value = azurerm_virtual_desktop_host_pool_registration_info.hp_reg
-  sensitive = true
-}
 
 # https://docs.microsoft.com/en-us/troubleshoot/azure/virtual-machines/custom-routes-enable-kms-activation ?

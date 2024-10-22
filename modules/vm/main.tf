@@ -51,8 +51,8 @@ resource "azurerm_windows_virtual_machine" "vm" {
   source_image_reference {
     publisher = "microsoftwindowsdesktop"
     offer     = "office-365"
-    #sku       = "win11-24h2-avd-m365"
-    sku     = "win11-24h2-m365"
+    sku       = "win11-24h2-avd-m365"
+    # sku     = "win11-24h2-m365"
     version = "latest"
   }
   identity {
@@ -62,7 +62,7 @@ resource "azurerm_windows_virtual_machine" "vm" {
   #   storage_account_uri = data.azurerm_storage_account.storage.primary_blob_endpoint
   # }
   lifecycle {
-    prevent_destroy = true // For now let's not destroy VMs...
+    # prevent_destroy = true // For now let's not destroy VMs...
     ignore_changes = [
       tags,
       size, // Lets us change the size of the VM in the portal ++ without terraform complaints
